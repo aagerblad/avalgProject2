@@ -12,18 +12,19 @@ public class Test {
         TSPSolver solver = new SimpleHeuristic();
 
 
-        assert (OnlyOneNodeTest(solver));
+        OnlyOneNodeTest(solver);
     }
 
 
-    public static boolean OnlyOneNodeTest(TSPSolver solver) {
+    public static void OnlyOneNodeTest(TSPSolver solver) {
         Graph graph = new Graph();
 
-        short[] solution = solver.solve(graph);
-
+        Solution solution = solver.solve(graph);
         double distance = graph.getDistance(solution);
 
-        return true;
+        GraphPrinter.printGraph(graph, solution);
+
+        return;
     }
 
 }

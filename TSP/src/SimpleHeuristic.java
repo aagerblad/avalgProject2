@@ -3,7 +3,8 @@
  */
 public class SimpleHeuristic implements TSPSolver {
     @Override
-    public short[] solve(Graph graph) {
-        return new short[0];
+    public Solution solve(Graph graph) {
+
+        return new Solution(graph.getNodes());
     }
 }
