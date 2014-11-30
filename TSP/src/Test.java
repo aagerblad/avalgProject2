@@ -1,3 +1,4 @@
+
 /**
  * Created by Andreas on 2014-11-27.
  */
@@ -17,12 +18,12 @@ public class Test {
 
 
     public static void OnlyOneNodeTest(TSPSolver solver) {
-        Graph graph = new Graph();
+        //Graph graph = new Graph();
 
-        Solution solution = solver.solve(graph);
-        double distance = graph.getDistance(solution);
+        //Solution solution = solver.solve(graph);
+        //double distance = graph.getDistance(solution);
 
-        GraphPrinter.printGraph(graph, solution);
+        //GraphPrinter.printGraph(graph, solution);
 
         return;
     }

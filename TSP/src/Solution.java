@@ -3,7 +3,7 @@
  */
 public class Solution {
 
-    short[] path;
+    public short[] path;
 
     public Solution(int nodes) {
         path = new short[nodes];
