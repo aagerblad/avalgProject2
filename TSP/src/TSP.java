@@ -27,10 +27,7 @@ public class TSP {
 
         Solution solution = solver.solve(graph, 10000);
         printSolution(solution);
-
-        System.out.println(graph.getDistance(solution));
-
-
+        printDistance(graph, solution);
 
     }
 
@@ -39,6 +36,10 @@ public class TSP {
             graph.addNode(i, in.getDouble(), in.getDouble());
         }
 
+    }
+
+    private void printDistance(Graph g, Solution s) {
+        System.out.println(g.getDistance(s));
     }
 
     private void printSolution(Solution s) {
