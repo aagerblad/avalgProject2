@@ -7,6 +7,7 @@
  */
 public class TSP {
 
+    private static long timeout = 1000;
     private Kattio in;
     private Graph graph;
     private int nodes;
@@ -22,20 +23,13 @@ public class TSP {
         in = new Kattio(System.in);
         nodes = in.getInt();
         graph = new Graph(nodes);
-        readGraph();
-
+        readGraph(nodes, graph, in);
 
         solveTSP(graph);
-//
-//        printSolution(solution);
-//        printDistance(graph, solution);
 
     }
 
     public static void solveTSP(Graph graph) {
-//        for (int m = 0; m < 20; m++) {
-//
-//        }
         long startTime = System.currentTimeMillis();
         TSPSolver solver = new Greedy();
 
@@ -46,28 +40,34 @@ public class TSP {
 
         TwoOpt twoOpt = new TwoOpt(solution);
 //        cTime = System.currentTimeMillis() - startTime;
-        solution = twoOpt.solve(graph, startTime, 15000);
+        long tout = timeout;
+        solution = twoOpt.solve(graph, startTime, tout);
         printSolution(solution);
 //        System.err.println("m=" + m);
-        printDistance(graph, solution);
+//        printDistance(graph, solution);
 
     }
 
-    private void readGraph() {
+    public static void readGraph(int nodes, Graph graph, Kattio in) {
         for (int i = 0; i < nodes; i++) {
             graph.addNode(i, in.getDouble(), in.getDouble());
         }
-
+//        graph.calculateNeihborhood();
     }
 
-    private static void printDistance(Graph g, Solution s) {
+    public static void printDistance(Graph g, Solution s) {
         System.err.println(g.getDistance(s));
     }
 
-    private static void printSolution(Solution s) {
+    public static void printSolution(Solution s) {
         for (int i = 0; i < s.path.length; i++) {
             System.out.println(s.path[i]);
         }
 
+    }
+
+    public final static void clearConsole()
+    {
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 }

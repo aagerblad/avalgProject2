@@ -15,14 +15,19 @@ public class Test {
     }
 
     Test() {
-        graph = get20Nodes();
+//        graph = getKNodes("TSP\\g1.in");
+        graph = get1000Nodes();
         TSP.solveTSP(graph);
     }
 
-    private void readGraph(int nodes, Graph graph, Kattio in) {
-        for (int i = 0; i < nodes; i++) {
-            graph.addNode(i, in.getDouble(), in.getDouble());
-        }
+//    public static void readGraph(int nodes, Graph graph, Kattio in) {
+//        for (int i = 0; i < nodes; i++) {
+//            graph.addNode(i, in.getDouble(), in.getDouble());
+//        }
+//    }
+
+    public Graph get3Nodes() {
+        return getKNodes("TSP\\g3.in");
     }
 
     public Graph get20Nodes() {
@@ -33,6 +38,10 @@ public class Test {
         return getKNodes("TSP\\g100.in");
     }
 
+    public Graph get1000Nodes() {
+        return getKNodes("TSP\\g1000.in");
+    }
+
     private Graph getKNodes(String s) {
         try {
             in = new Kattio(new FileInputStream(s));
@@ -41,7 +50,7 @@ public class Test {
         }
         int nodes = in.getInt();
         Graph graph = new Graph(nodes);
-        readGraph(nodes, graph, in);
+        TSP.readGraph(nodes, graph, in);
         return graph;
     }
 

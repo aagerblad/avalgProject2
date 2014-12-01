@@ -26,7 +26,7 @@ public class TwoOpt implements TSPSolver{
 //        }
 //    }
 
-    public int m = 18;
+    public int m = 0;
     Solution currentSolution;
 
     public TwoOpt (Solution solution) {
@@ -50,7 +50,7 @@ public class TwoOpt implements TSPSolver{
         int minj = 0;
 
 //        LinkedList<Change> improvements = new LinkedList<Change>();
-        Random random = new Random();
+//        Random random = new Random();
         int N = currentSolution.path.length;
 //        int m = random.nextInt(N);
 //        int m = 0;
@@ -60,18 +60,19 @@ public class TwoOpt implements TSPSolver{
 //                improvements.clear();
             bestChange = 0;
 //            outOfLoop:
-            for (int t = 0; t < N-1; t++) {
+            for (int t = 0; t < N; t++) {
 
                 int i = (t + m) % N;
-//                if (System.currentTimeMillis() - startTime > duration)
-//                    return currentSolution;
 
                 short nodeI = currentSolution.path[i];
                 short nodeInext = currentSolution.path[(i+1) % N];
 
                 // Stämmer det här??
-                for (int u = t+2; u < N-1; u++) {
-                    int j = (u + m) % N;
+//                for (int u = t+2; u < N-1; u++) {
+                for (int u = 0; u < N-2; u++) {
+                    if (System.currentTimeMillis() - startTime > duration)
+                        return currentSolution;
+                    int j = (u + t + 2 + m) % N;
                     short nodeJ = currentSolution.path[j];
                     short nodeJnext = currentSolution.path[(j+1) % N];
 
@@ -98,9 +99,12 @@ public class TwoOpt implements TSPSolver{
 //            int r = random.nextInt(Math.min(1, improvements.size()));
 //            mini = improvements.get(r).mini;
 //            minj = improvements.get(r).minj;
-            currentSolution.twoOptimization(mini, minj);
-//        } while (bestChange < 0 && System.currentTimeMillis() - startTime < duration);
-        } while (bestChange < 0);
+            if (bestChange < 0)
+                currentSolution.twoOptimization(mini, minj);
+//            TSP.clearConsole();
+//            TSP.printSolution(currentSolution);
+        } while (bestChange < 0 && System.currentTimeMillis() - startTime < duration);
+//        } while (bestChange < 0);
 
 
         return currentSolution;

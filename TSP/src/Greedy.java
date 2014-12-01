@@ -12,17 +12,30 @@ public class Greedy implements TSPSolver {
 
     @Override
     public Solution solve(Graph graph, long time, long duration) {
+
+
         int n = graph.getNodes();
         Solution solution = new Solution(n);
+
+        if (n == 2) {
+            solution.path = new short[] {0, 1};
+            return solution;
+        }
+
+        if (n == 1) {
+            solution.path = new short[] {0};
+            return solution;
+        }
+
         boolean[] used = new boolean[n];
         short best;
-
+        int startValue = 2;
 //        Random random = new Random();
 //        solution.path[0] = 0;
 //        solution.path[0] = (short) random.nextInt(n);
 //        System.err.println("Path start: " + solution.path[0]);
-        solution.path[0] = 11;
-        used[11] = true;
+        solution.path[0] = (short) startValue;
+        used[startValue] = true;
 
         for (int i = 1; i < n; i ++) {
             best = -1;

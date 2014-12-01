@@ -11,6 +11,12 @@ public class Solution {
 
     public void twoOptimization(int mini, int minj) {
         short[] newPath = path.clone();
+        if (minj < mini) {
+            for (int i = 0; i < path.length; i++) {
+                newPath[i] = path[(i+mini)%path.length];
+            }
+        }
+
         for (int i = 0; i < minj-mini; i++) {
             newPath[mini+i+1] = path[minj-i];
         }
