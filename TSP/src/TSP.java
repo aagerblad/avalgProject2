@@ -7,7 +7,7 @@
  */
 public class TSP {
 
-    private static long timeout = 1000;
+    private static long timeout = 5000;
     private Kattio in;
     private Graph graph;
     private int nodes;
@@ -30,6 +30,7 @@ public class TSP {
     }
 
     public static void solveTSP(Graph graph) {
+        graph.getNeighbors();
         long startTime = System.currentTimeMillis();
         TSPSolver solver = new Greedy();
 
@@ -42,9 +43,11 @@ public class TSP {
 //        cTime = System.currentTimeMillis() - startTime;
         long tout = timeout;
         solution = twoOpt.solve(graph, startTime, tout);
+        TwoHalfOpt twoHalfOpt = new TwoHalfOpt(solution);
+        solution = twoHalfOpt.solve(graph, startTime, tout);
         printSolution(solution);
 //        System.err.println("m=" + m);
-//        printDistance(graph, solution);
+        printDistance(graph, solution);
 
     }
 

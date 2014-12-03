@@ -40,6 +40,7 @@ public class TwoOpt implements TSPSolver{
 
     @Override
     public Solution solve(Graph graph, long startTime, long duration) {
+
         if (System.currentTimeMillis() - startTime > duration)
             return currentSolution;
 
@@ -90,6 +91,8 @@ public class TwoOpt implements TSPSolver{
                         bestChange = change;
                         mini = i;
                         minj = j;
+                        currentSolution.twoOptimization(mini, minj); //blev ju bättre att bara ha den här
+
 //                        break outOfLoop;
                     }
                 }
@@ -99,8 +102,8 @@ public class TwoOpt implements TSPSolver{
 //            int r = random.nextInt(Math.min(1, improvements.size()));
 //            mini = improvements.get(r).mini;
 //            minj = improvements.get(r).minj;
-            if (bestChange < 0)
-                currentSolution.twoOptimization(mini, minj);
+            //if (bestChange < 0)
+            //    currentSolution.twoOptimization(mini, minj);
 //            TSP.clearConsole();
 //            TSP.printSolution(currentSolution);
         } while (bestChange < 0 && System.currentTimeMillis() - startTime < duration);
@@ -109,5 +112,8 @@ public class TwoOpt implements TSPSolver{
 
         return currentSolution;
     }
+
+
+
 }
  

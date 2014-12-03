@@ -29,12 +29,12 @@ public class Greedy implements TSPSolver {
 
         boolean[] used = new boolean[n];
         short best;
-        int startValue = 2;
+        int startValue = 0;
 //        Random random = new Random();
 //        solution.path[0] = 0;
 //        solution.path[0] = (short) random.nextInt(n);
 //        System.err.println("Path start: " + solution.path[0]);
-        solution.path[0] = (short) startValue;
+        solution.set((short)startValue, 0); //[0] = (short) startValue;
         used[startValue] = true;
 
         for (int i = 1; i < n; i ++) {
@@ -45,7 +45,8 @@ public class Greedy implements TSPSolver {
                     best = j;
                 }
             }
-            solution.path[i] = best;
+            solution.set(best, i);
+            //solution.path[i] = best;
             used[best] = true;
 
         }

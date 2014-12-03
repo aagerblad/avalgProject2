@@ -18,6 +18,8 @@ public class Test {
 //        graph = getKNodes("TSP\\g1.in");
         graph = get1000Nodes();
         TSP.solveTSP(graph);
+
+        //TSP.printDistance(graph, );
     }
 
 //    public static void readGraph(int nodes, Graph graph, Kattio in) {
@@ -27,19 +29,19 @@ public class Test {
 //    }
 
     public Graph get3Nodes() {
-        return getKNodes("TSP\\g3.in");
+        return getKNodes("TSP/g3.in");
     }
 
     public Graph get20Nodes() {
-        return getKNodes("TSP\\g20.in");
+        return getKNodes("TSP/g20.in");
     }
 
     public Graph get100Nodes() {
-        return getKNodes("TSP\\g100.in");
+        return getKNodes("TSP/g100.in");
     }
 
     public Graph get1000Nodes() {
-        return getKNodes("TSP\\g1000.in");
+        return getKNodes("TSP/g1000.in");
     }
 
     private Graph getKNodes(String s) {
