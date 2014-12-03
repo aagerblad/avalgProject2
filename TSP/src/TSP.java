@@ -7,11 +7,10 @@
  */
 public class TSP {
 
-    private static long timeout = 1400;
+    private static long timeout = 1600;
     private Kattio in;
     private Graph graph;
     private int nodes;
-    TSPSolver solver;
 
 
     public static void main(String[] args) {
@@ -37,20 +36,16 @@ public class TSP {
 
         long cTime = System.currentTimeMillis() - startTime;
         Solution solution = solver.solve(graph, cTime, 0);
-//        printSolution(solution);
-//        printDistance(graph, solution);
 
         TwoOpt twoOpt = new TwoOpt(solution);
-//        cTime = System.currentTimeMillis() - startTime;
         long tout = timeout;
         solution = twoOpt.solve(graph, startTime, tout);
 
-        printDistance(graph, solution);
-        TwoHalfOpt twoHalfOpt = new TwoHalfOpt(solution);
-        solution = twoHalfOpt.solve(graph, startTime, tout);
-//        printSolution(solution);
-//        System.err.println("m=" + m);
-        printDistance(graph, solution);
+//        printDistance(graph, solution);
+//        TwoHalfOpt twoHalfOpt = new TwoHalfOpt(solution);
+//        solution = twoHalfOpt.solve(graph, startTime, tout);
+        printSolution(solution);
+//        printDistance(graph, solution);
 
     }
 
@@ -58,7 +53,6 @@ public class TSP {
         for (int i = 0; i < nodes; i++) {
             graph.addNode(i, in.getDouble(), in.getDouble());
         }
-//        graph.calculateNeihborhood();
     }
 
     public static void printDistance(Graph g, Solution s) {

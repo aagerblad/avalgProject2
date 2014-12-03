@@ -47,9 +47,7 @@ public class TwoHalfOpt implements TSPSolver{
                 opt = graph.distances[newSolution.path[e2]][newSolution.path[t2]] + graph.distances[newSolution.path[t2]][newSolution.path[e1]] + graph.distances[newSolution.path[t1]][newSolution.path[t3]];
 
 
-                if (opt < length)
-                {
-
+                if (opt < length) {
                     newSolution.moveNode(t2, e2);
                     improvement = true;
                     break;

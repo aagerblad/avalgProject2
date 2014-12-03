@@ -7,13 +7,9 @@ public class Graph {
 
     private Node[] nodes;
     public int[][] distances;
-    //public short[][] neighborhood;
     public short[][] neighbors;
     private int numNodes = 0;
     public int numNeighbors = 100;
-
-
-
 
     private class Node {
         public double x;
@@ -25,25 +21,6 @@ public class Graph {
         }
     }
 
-    //private class NeighborhoodNode implements Comparable<NeighborhoodNode> {
-    //
-    //    double distance;
-    //    short id;
-    //
-    //    NeighborhoodNode(double distance, short id) {
-    //        this.distance = distance;
-    //        this.id = id;
-    //    }
-    //
-    //    @Override
-    //    public int compareTo(NeighborhoodNode o) {
-    //        if (distance > o.distance)
-    //            return 1;
-    //        if (distance < o.distance)
-    //            return -1;
-    //        return 0;
-    //    }
-    //}
 
     public Graph(int n) {
         this.numNodes = n;
@@ -120,11 +97,6 @@ public class Graph {
     public int getNodes() {
         return numNodes;
     }
-
-    public int[][] getDistances() {
-        return distances;
-    }
-
 
     public double getDistance(Solution solution) {
         double distance = 0;

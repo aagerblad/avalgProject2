@@ -50,18 +50,12 @@ public class TwoOpt implements TSPSolver{
         int mini = 0;
         int minj = 0;
 
-//        LinkedList<Change> improvements = new LinkedList<Change>();
-//        Random random = new Random();
         int N = currentSolution.path.length;
-//        int m = random.nextInt(N);
-//        int m = 0;
+
         int iterator = 0;
         do {
             iterator++;
-//            if(!improvements.isEmpty())
-//                improvements.clear();
             bestChange = 0;
-//            outOfLoop:
             for (int t = 0; t < N; t++) {
 
                 int i = (t + m) % N;
@@ -69,8 +63,6 @@ public class TwoOpt implements TSPSolver{
                 short nodeI = currentSolution.path[i];
                 short nodeInext = currentSolution.path[(i+1) % N];
 
-                // Stämmer det här??
-//                for (int u = t+2; u < N-1; u++) {
                 for (int u = 0; u < N-2; u++) {
                     if (System.currentTimeMillis() - startTime > duration)
                         return currentSolution;
@@ -86,7 +78,6 @@ public class TwoOpt implements TSPSolver{
 
                     int change = newIJDistance + newIJNextDistance - (curIDistance + curJDistance);
 
-//                    improvements.add(new Change(i, j, change));
 
                     if (change < bestChange) {
                         bestChange = change;
@@ -94,24 +85,17 @@ public class TwoOpt implements TSPSolver{
                         minj = j;
                         currentSolution.twoOptimization((short)mini, (short)minj); //blev ju bättre att bara ha den här
 
-//                        break outOfLoop;
                     }
                 }
             }
 
-//            Collections.sort(improvements);
-//            int r = random.nextInt(Math.min(1, improvements.size()));
-//            mini = improvements.get(r).mini;
-//            minj = improvements.get(r).minj;
             //if (bestChange < 0)
             //    currentSolution.twoOptimization(mini, minj);
-//            TSP.clearConsole();
-//            TSP.printSolution(currentSolution);
-            if (iterator > 30)
-                break;
+
+//            if (iterator > 50)
+//                break;
 
         } while ((bestChange < 0 && System.currentTimeMillis() - startTime < duration));
-//        } while (bestChange < 0);
 
 
         return currentSolution;
