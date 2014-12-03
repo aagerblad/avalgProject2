@@ -6,11 +6,11 @@ import java.util.Arrays;
 public class Graph {
 
     private Node[] nodes;
-    public double[][] distances;
+    public int[][] distances;
     //public short[][] neighborhood;
-    public int[][] neighbors;
+    public short[][] neighbors;
     private int numNodes = 0;
-    public int numNeighbors = 50;
+    public int numNeighbors = 100;
 
 
 
@@ -47,9 +47,13 @@ public class Graph {
 
     public Graph(int n) {
         this.numNodes = n;
-        this.distances = new double[n][n];
+        this.distances = new int[n][n];
         //this.neighborhood = new short[n][n];
         this.nodes = new Node[n];
+
+        if (n < this.numNeighbors)
+            this.numNeighbors = n;
+        //this.numNeighbors = n;
     }
 
     public void addNode(int i, double x, double y) {
@@ -57,7 +61,7 @@ public class Graph {
 
         for (int j = 0; j < nodes.length; j++) {
             if (nodes[j] != null) {
-                distances[i][j] =  Math.sqrt((nodes[i].x-nodes[j].x) * (nodes[i].x-nodes[j].x) + (nodes[i].y-nodes[j].y) * (nodes[i].y-nodes[j].y));
+                distances[i][j] =  (int) Math.round(Math.sqrt((nodes[i].x-nodes[j].x) * (nodes[i].x-nodes[j].x) + (nodes[i].y-nodes[j].y) * (nodes[i].y-nodes[j].y)));
                 distances[j][i] = distances[i][j];
             }
         }
@@ -66,14 +70,14 @@ public class Graph {
     public void getNeighbors() {
             if (numNeighbors >= numNodes)
                 numNeighbors = numNodes-1;
-            neighbors =  new int[numNodes][numNeighbors];
+            neighbors =  new short[numNodes][numNeighbors];
 
 
             double dist;
-            for (int i = 0; i < numNodes; i++) {
-                Arrays.fill(neighbors[i], -1);
+            for (short i = 0; i < numNodes; i++) {
+                Arrays.fill(neighbors[i], (short)-1);
                 innerFor:
-                for (int n = 0; n < numNodes; n++) {
+                for (short n = 0; n < numNodes; n++) {
                     if (i != n) {
                         dist = distances[i][n];
 
@@ -117,7 +121,7 @@ public class Graph {
         return numNodes;
     }
 
-    public double[][] getDistances() {
+    public int[][] getDistances() {
         return distances;
     }
 

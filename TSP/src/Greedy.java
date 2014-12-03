@@ -13,7 +13,7 @@ public class Greedy implements TSPSolver {
     @Override
     public Solution solve(Graph graph, long time, long duration) {
 
-
+//          return newGreedy(graph, time, duration);
         int n = graph.getNodes();
         Solution solution = new Solution(n);
 

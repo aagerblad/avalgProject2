@@ -63,7 +63,6 @@ public class Test {
         //Solution solution = solver.solve(graph);
         //double distance = graph.getDistance(solution);
 
-        //GraphPrinter.printGraph(graph, solution);
 
         return;
     }
