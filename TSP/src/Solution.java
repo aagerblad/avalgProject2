@@ -1,3 +1,6 @@
+import java.util.Collections;
+import java.util.LinkedList;
+
 /**
  * Created by Andreas on 2014-11-27.
  */
@@ -45,19 +48,32 @@ public class Solution {
     public void twoOptimization(short mini, short minj) {
         short[] newPath = path.clone();
         short[] newPos = positions.clone();
-        if (minj < mini) {
-            for (short i = 0; i < path.length; i++) {
-                newPath[i] = path[(i+mini)%path.length];
-                newPos[path[(i+mini)%path.length]] = i;
-            }
+
+        LinkedList<Short> values = new LinkedList<Short>();
+        short node = path[mini]; // 8
+        short Jnext = path[minj]; // 3
+
+        while(node != minj) {
+            values.add(node);
+            node = path[node];
         }
 
-        for (short i = 0; i < minj-mini; i++) {
-            newPath[mini+i+1] = path[minj-i];
-            newPos[path[minj-i]] = (short) (mini+i+1);
-        }
+        // 8,5 -> 5,8
+//        Collections.reverse(values);
 
-        path = newPath.clone();
+        node = path[path[mini]];
+        short newNode;
+        while(node != minj) {
+            newNode = path[node];
+            path[node] = values.pop();
+            node = newNode;
+        }
+        path[node] = values.pop();
+
+        path[path[mini]] = Jnext;
+
+        path[mini] = minj;
+
         positions = newPos.clone();
 
     }

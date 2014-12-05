@@ -7,7 +7,7 @@
  */
 public class TSP {
 
-    private static long timeout = 1600;
+    private static long timeout = 1000;
     private Kattio in;
     private Graph graph;
     private int nodes;
@@ -19,33 +19,49 @@ public class TSP {
 
     public TSP() {
 
+        long startTime = System.currentTimeMillis();
         in = new Kattio(System.in);
         nodes = in.getInt();
-        graph = new Graph(nodes);
-        readGraph(nodes, graph, in);
+        if (nodes == 2) {
+            System.out.println("0\n1");
+        } else if (nodes == 1) {
+            System.out.println("0");
+        } else if (nodes == 0) {
+            System.out.println("");
+        } else {
+            graph = new Graph(nodes);
+            readGraph(nodes, graph, in);
 
-        solveTSP(graph);
-
+            solveTSP(graph, startTime);
+        }
     }
 
-    public static void solveTSP(Graph graph) {
-        graph.getNeighbors();
+    public static void solveTSP(Graph graph, long startTime) {
+        if (graph.getNodes() > 5)
+            graph.getNeighbors();
 
-        long startTime = System.currentTimeMillis();
         TSPSolver solver = new Greedy();
 
         long cTime = System.currentTimeMillis() - startTime;
         Solution solution = solver.solve(graph, cTime, 0);
+//        printSolution(solution);
+//        printDistance(graph, solution);
+//        printSolution(solution);
+//        printDistance(graph, solution);
 
         TwoOpt twoOpt = new TwoOpt(solution);
+//        cTime = System.currentTimeMillis() - startTime;
         long tout = timeout;
         solution = twoOpt.solve(graph, startTime, tout);
+        twoOpt = new TwoOpt(solution);
+
+//        solution = twoOpt.solve(graph, startTime, tout);
 
 //        printDistance(graph, solution);
 //        TwoHalfOpt twoHalfOpt = new TwoHalfOpt(solution);
 //        solution = twoHalfOpt.solve(graph, startTime, tout);
         printSolution(solution);
-//        printDistance(graph, solution);
+        printDistance(graph, solution);
 
     }
 
@@ -53,6 +69,7 @@ public class TSP {
         for (int i = 0; i < nodes; i++) {
             graph.addNode(i, in.getDouble(), in.getDouble());
         }
+//        graph.calculateNeihborhood();
     }
 
     public static void printDistance(Graph g, Solution s) {
@@ -60,8 +77,10 @@ public class TSP {
     }
 
     public static void printSolution(Solution s) {
+        short node = 0;
         for (int i = 0; i < s.path.length; i++) {
-            System.out.println(s.path[i]);
+            System.out.println(s.path[node]);
+            node = s.path[node];
         }
 
     }

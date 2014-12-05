@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
  * Created by Andreas on 2014-11-27.
  */
 public class Test {
-
     private Kattio in;
     Graph graph;
     TSPSolver solver;
@@ -15,9 +14,12 @@ public class Test {
     }
 
     Test() {
-//        graph = getKNodes("TSP\\g1.in");
-        graph = get1000Nodes();
-        TSP.solveTSP(graph);
+        long startTime = System.currentTimeMillis();
+        graph = getKNodes("TSP\\g3.in");
+
+//        graph = get1000Nodes();
+
+        TSP.solveTSP(graph, startTime);
 
         //TSP.printDistance(graph, );
     }

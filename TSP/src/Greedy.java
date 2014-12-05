@@ -29,27 +29,51 @@ public class Greedy implements TSPSolver {
 
         boolean[] used = new boolean[n];
         short best;
-        int startValue = 0;
-//        Random random = new Random();
-//        solution.path[0] = 0;
-//        solution.path[0] = (short) random.nextInt(n);
-//        System.err.println("Path start: " + solution.path[0]);
-        solution.set((short)startValue, 0); //[0] = (short) startValue;
-        used[startValue] = true;
 
-        for (int i = 1; i < n; i ++) {
-            best = -1;
-            for (short j = 0; j < n; j ++) {
-                if (!used[j] && (best == -1 || graph.distances[solution.path[i-1]][j] < graph.distances[solution.path[i-1]][best])) {
+        short startNode = 0;
+        used[startNode] = true;
 
-                    best = j;
-                }
+        short curNode = startNode;
+
+        for (int j = 0; j < n; j++) {
+            int i;
+            best = curNode;
+            for (i = 0; i < n; i++) {
+                if (!used[i] &&
+                        (graph.distances[curNode][i] < graph.distances[curNode][best] || best == curNode))
+                    best = (short)i;
             }
-            solution.set(best, i);
-            //solution.path[i] = best;
             used[best] = true;
-
+            solution.path[curNode] = best;
+            curNode = best;
         }
+        solution.path[curNode] = startNode;
+
+//        int startValue = 0;
+////        Random random = new Random();
+////        solution.path[0] = 0;
+////        solution.path[0] = (short) random.nextInt(n);
+////        System.err.println("Path start: " + solution.path[0]);
+//
+//
+//
+//
+//        solution.set((short)startValue, 0); //[0] = (short) startValue;
+//        used[startValue] = true;
+//
+//        for (int i = 1; i < n; i ++) {
+//            best = -1;
+//            for (short j = 0; j < n; j ++) {
+//                if (!used[j] && (best == -1 || graph.distances[solution.path[i-1]][j] < graph.distances[solution.path[i-1]][best])) {
+//
+//                    best = j;
+//                }
+//            }
+//            solution.set(best, i);
+//            //solution.path[i] = best;
+//            used[best] = true;
+//
+//        }
 
         return solution;
     }

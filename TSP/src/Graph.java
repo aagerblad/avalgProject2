@@ -9,6 +9,7 @@ public class Graph {
     public int[][] distances;
     public short[][] neighbors;
     private int numNodes = 0;
+//    public int numNeighbors = 100;
     public int numNeighbors = 100;
 
     private class Node {
@@ -53,6 +54,7 @@ public class Graph {
             double dist;
             for (short i = 0; i < numNodes; i++) {
                 Arrays.fill(neighbors[i], (short)-1);
+
                 innerFor:
                 for (short n = 0; n < numNodes; n++) {
                     if (i != n) {
@@ -60,7 +62,6 @@ public class Graph {
 
                         if (neighbors[i][numNeighbors -1] != -1 && dist > distances[i][neighbors[i][numNeighbors -1]])
                             continue;
-
 
                         int min=0, max, mid;
                         max = numNeighbors;
@@ -100,9 +101,12 @@ public class Graph {
 
     public double getDistance(Solution solution) {
         double distance = 0;
-        for (int i = 0; i < solution.path.length - 1; i++)
-            distance += distances[solution.path[i]][solution.path[i+1]];
-        distance += distances[solution.path[0]][solution.path[solution.path.length-1]];
+        short node = 0;
+        for (int i = 0; i < solution.path.length - 1; i++) {
+            distance += distances[node][solution.path[node]];
+            node = solution.path[node];
+        }
+        distance += distances[node][0];
         return distance;
     }
 }
